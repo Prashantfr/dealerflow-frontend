@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme static {
+  --color-canvas: #0f1419;
+  --color-panel: #171d26;
+  --color-side: #131922;
+  --color-line: #263040;
+  --color-line-strong: #3a4a60;
+  --color-ink: #e6eaf0;
+  --color-mut: #9aa7b8;
+  --color-brand: #5b9dff;
+  --color-sel: #22324a;
+  --color-ok: #3dd68c;
+  --color-bad: #ff7b7b;
+  --color-warn: #f5b14c;
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* One page scroll only: the whole document scrolls vertically, never sideways. */
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+}
+#root {
+  min-height: 100dvh;
+}
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .card {
+    @apply min-w-0 rounded-xl border border-line bg-panel p-4;
+  }
+  .btn {
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center rounded-lg border border-transparent px-4 text-base font-semibold disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply bg-brand text-canvas;
+  }
+  .btn-outline {
+    @apply border-line-strong text-ink hover:bg-white/5;
+  }
+  .field {
+    @apply min-h-12 w-full rounded-lg border border-line bg-panel px-3 text-base text-ink placeholder:text-mut;
+  }
+  .label {
+    @apply mb-1.5 block text-sm text-mut;
+  }
+}
