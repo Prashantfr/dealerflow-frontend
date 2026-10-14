@@ -4,11 +4,9 @@ export const AUTH_KEY = "dealerflow_auth";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
-  // Free hosting tiers can take a while to wake up
   timeout: 45000,
 });
 
-// Attach the JWT to every request
 api.interceptors.request.use((config) => {
   try {
     const saved = JSON.parse(localStorage.getItem(AUTH_KEY));
@@ -19,7 +17,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// If the token is rejected, tell the app to log the user out
 api.interceptors.response.use(
   (response) => response,
   (error) => {
