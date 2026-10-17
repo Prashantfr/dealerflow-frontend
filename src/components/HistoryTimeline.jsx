@@ -6,12 +6,27 @@ const META = {
   return: { dot: "bg-warn", icon: "↩" },
 };
 
+
 function titleFor(entry, hadReturnBefore) {
-  if (entry.action === "reject") return "Rejected";
-  if (entry.action === "return") return "Returned for correction";
-  if (entry.department === "sales") return hadReturnBefore ? "Resubmitted" : "Submitted";
-  return "Approved";
+    if (entry.action === "reject") {
+        return "Rejected";
+    }
+
+    if (entry.action === "return") {
+        return "Returned for correction";
+    }
+
+    if (hadReturnBefore && entry.action === "approve") {
+        return "Resubmitted / Approved";
+    }
+
+    if (entry.department === "sales") {
+        return "Submitted";
+    }
+
+    return "Approved";
 }
+
 
 export default function HistoryTimeline({ app }) {
   const history = app.history || [];

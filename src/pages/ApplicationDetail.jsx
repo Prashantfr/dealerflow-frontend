@@ -19,12 +19,27 @@ import {
   nextDepartment,
 } from "../utils/workflow";
 
+
 function successMessage(action, updated) {
-  if (action === "reject") return "Application rejected.";
-  if (action === "return") return "Application returned to Sales for correction.";
-  if (updated.status === "approved") return "Application approved. Dealer onboarding is complete.";
-  return `Application sent to ${DEPT_LABEL[updated.currentDepartment]}.`;
+    if (action === "reject") {
+        return "Application rejected.";
+    }
+
+    if (action === "return") {
+        return `Application returned to ${
+            DEPT_LABEL[updated.currentDepartment]
+        } for correction.`;
+    }
+
+    if (updated.status === "approved") {
+        return "Application approved. Dealer onboarding is complete.";
+    }
+
+    return `Application sent to ${
+        DEPT_LABEL[updated.currentDepartment]
+    }.`;
 }
+
 
 export default function ApplicationDetail() {
   const { id } = useParams();
@@ -93,7 +108,7 @@ export default function ApplicationDetail() {
     if (confirming === "return")
       return {
         title: "Return for correction?",
-        message: "The application goes back to Sales so it can be corrected and resubmitted.",
+        message: `The application will return to ${DEPT_LABEL[FLOW[FLOW.indexOf(app.currentDepartment) - 1]]} for correction.`,
         confirmLabel: "Return",
         tone: "warn",
       };
